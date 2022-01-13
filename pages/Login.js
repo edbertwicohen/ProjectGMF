@@ -1,5 +1,5 @@
 import React from "react";
-import { Center, Image, View, Text, Input, HStack, Checkbox, Button } from "native-base";
+import { Image, View, Text, Input, Button } from "native-base";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const Login = () => {

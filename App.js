@@ -12,6 +12,7 @@ import AppBar from './components/AppBar';
 import History from './pages/History';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 const App = () => {
   const theme = extendTheme({
@@ -63,9 +64,10 @@ const App = () => {
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
-        <Login/>
-        {/* <AppBar/>
-        <History /> */}
+        {/* <Login/> */}
+        <Profile/>
+        {/* <AppBar/> */}
+        {/* <History /> */}
       </NavigationContainer>
     </NativeBaseProvider>
   );
