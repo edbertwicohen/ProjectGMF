@@ -64,8 +64,8 @@ const App = () => {
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
-        {/* <Login/> */}
-        <Profile/>
+        <Login/>
+        {/* <Profile/> */}
         {/* <AppBar/> */}
         {/* <History /> */}
       </NavigationContainer>
