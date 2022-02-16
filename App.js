@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NativeBaseProvider, extendTheme, View, Image } from "native-base";
 import AppBar from './components/AppBar';
 import History from './pages/History';
@@ -21,6 +21,9 @@ import Search from './pages/Search';
 import NewsDetail from './pages/NewsDetail';
 import HomeNavigator from './pages/HomeNavigator';
 import { StatusBar } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
+import ProfileNavigator from './pages/ProfileNavigator';
+import auth from '@react-native-firebase/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,13 +74,30 @@ const App = () => {
     },
   });
 
-  const [isLoggedIn, setLoggedIn] = useState(false)
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
+  // Handle user state changes
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect ( () => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  useEffect(() => {
+    if (!initializing) SplashScreen.hide();
+  }, [initializing])
+  
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         <StatusBar backgroundColor="#0288D1" barStyle="light-content" />
-        {isLoggedIn ? <Tab.Navigator screenOptions={({ route }) => ({
+        {user ? <Tab.Navigator screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
@@ -85,7 +105,7 @@ const App = () => {
               iconName = focused ? 'ios-home' : 'ios-home-outline';
             } else if (route.name === 'History') {
               iconName = focused ? 'md-timer' : 'md-timer-outline';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'InitialProfile') {
               iconName = focused ? 'person-circle' : 'person-circle-outline';
             }
 
@@ -100,9 +120,9 @@ const App = () => {
         })}> 
           <Tab.Screen name="InitialHome" component={HomeNavigator} options={{ header: () => null }}/>
           <Tab.Screen name="History" component={History} />
-          <Tab.Screen name="Profile" component={Profile} initialParams={{ onLogout: () => setLoggedIn(false) }}/>
+          <Tab.Screen name="InitialProfile" component={ProfileNavigator} options={{ header: () => null }} initialParams={{ onLogout: () => setLoggedIn(false) }}/>
         </Tab.Navigator>
-        : <Login onLogin={() => setLoggedIn(true)}/>}
+        : <Login />}
         {/* <Home/> */}
         {/* <News/> */}
         {/* <Search/> */}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837212629411",
+    "project_id": "gmf-project-a7af3",
+    "storage_bucket": "gmf-project-a7af3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837212629411:android:ba5d473ab06d7c80af5216",
+        "android_client_info": {
+          "package_name": "com.newprojectrtms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837212629411-j6iala57gd1pmjads5n19l0sien75822.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaYLeSFmrolynX5JIqmeMCGLQ62-iYFGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837212629411-j6iala57gd1pmjads5n19l0sien75822.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
